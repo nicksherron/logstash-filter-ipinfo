@@ -25,7 +25,7 @@ class LogStash::Filters::Ipinfo < LogStash::Filters::Base
   # Replace the message with this value.
 
   config :ip, :validate => :string, :required => true
-  config :token, :validate => :string, :required => false
+  config :token, :validate => :string, :default => ""
   config :target, :validate => :string, :default => "ipinfo"
 
 

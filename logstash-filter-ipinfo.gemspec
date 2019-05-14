@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'logstash-filter-ipinfo'
-  s.version       = '1.0.0'
+  s.version       = '1.1.0'
   s.licenses      = ['Apache-2.0']
   s.summary = 'This ipinfo filter takes contents in the ip field and returns ip geolocation api data (see https://ipinfo.io/ for more info).'
   s.description     = 'Geolocation enrichment for IP addresses matched from logstash events'
