@@ -1,0 +1,16 @@
+.idea/*
+logstash.conf
+*.gem
+Gemfile.lock
+.bundle
+vendor
+
+
+# Intellij
+.idea
+*.iml
+
+gradle.properties
+.env
+utils/
+.envrc
