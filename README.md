@@ -68,6 +68,52 @@ output {
 ```
 
 
+Example configuration file for adding geolocation data to access logs collected by the [nginx Filebeat module](https://www.elastic.co/guide/en/beats/filebeat/7.0/filebeat-module-nginx.html).
+
+```
+# logstash.conf
+
+input {
+  beats {
+    port => 5044
+    host => "0.0.0.0"
+  }
+}
+filter {
+  if [fileset][module] == "nginx" {
+    if [fileset][name] == "access" {
+      grok {
+        match => { "message" => ["%{IPORHOST:[nginx][access][remote_ip]} - %{DATA:[nginx][access][user_name]} \[%{HTTPDATE:[nginx][access][time]}\] \"%{WORD:[nginx][access][method]} %{DATA:[nginx][access][url]} HTTP/%{NUMBER:[nginx][access][http_version]}\" %{NUMBER:[nginx][access][response_code]} %{NUMBER:[nginx][access][body_sent][bytes]} \"%{DATA:[nginx][access][referrer]}\" \"%{DATA:[nginx][access][agent]}\""] }
+        remove_field => "message"
+      }
+      mutate {
+        add_field => { "read_timestamp" => "%{@timestamp}" }
+      }
+      date {
+        match => [ "[nginx][access][time]", "dd/MMM/YYYY:H:m:s Z" ]
+        remove_field => "[nginx][access][time]"
+      }
+      useragent {
+        source => "[nginx][access][agent]"
+        target => "[nginx][access][user_agent]"
+        remove_field => "[nginx][access][agent]"
+      }
+      ipinfo {
+        ip => "[nginx][access][remote_ip]"
+        target => "[nginx][access][ipinfo]"
+      }
+    }
+  }
+}
+output {
+  elasticsearch {
+    hosts => localhost
+    manage_template => false
+    index => "%{[@metadata][beat]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"
+  }
+}
+
+```
 
 ## Contributing
 
