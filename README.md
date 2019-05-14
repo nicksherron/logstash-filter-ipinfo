@@ -21,7 +21,7 @@ Or you can build it yourself:
 git clone https://github.com/nsherron90/logstash-filter-ipinfo.git
 bundle install
 gem build logstash-filter-ipinfo.gemspec
-$LS_HOME/bin/logstash-plugin install logstash-filter-ipinfo-0.1.2.gem
+$LS_HOME/bin/logstash-plugin install logstash-filter-ipinfo-1.0.0.gem
 ```
 
 ### 2. Filter Configuration
