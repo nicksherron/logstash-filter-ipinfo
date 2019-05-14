@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name          = 'logstash-filter-ipinfo'
-  s.version       = '0.1.1'
+  s.version       = '0.1.2'
   s.licenses      = ['Apache-2.0']
-  s.summary = 'This ipinfo filter takes contents in the ip field and returns ipinfo api data (see https://ipinfo.io/ for more info).'
-  s.description     = 'This gem is a Logstash plugin required to be installed on top of the Logstash core pipeline using $LS_HOME/bin/logstash-plugin install logstash-filter-ipinfo. This gem is not a stand-alone program'
+  s.summary = 'This ipinfo filter takes contents in the ip field and returns ip geolocation api data (see https://ipinfo.io/ for more info).'
+  s.description     = 'Geolocation enrichment for IP addresses matched from logstash events'
   s.homepage = 'https://github.com/nsherron90/logstash-filter-ipinfo'
   s.authors       = ['nsherron90']
   s.email         = 'nsherron90@gmail.com'
